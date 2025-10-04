@@ -1,0 +1,2 @@
+1. Create config server
+2. Test creating lots of container for a specific service and let eureka load balance it. When a service receives a request, log it
