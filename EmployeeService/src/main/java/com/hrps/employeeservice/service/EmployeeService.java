@@ -15,6 +15,12 @@ public class EmployeeService {
     }
 
     public EmployeeResponse addEmployee(EmployeeRequest employeeRequest) {
-
+        // Save employee to db
+        // Produce Kafka send event to topic "employee-created"
+        //  Listeners:
+        //  - Payroll Service create payroll profile
+        //  - Leave Service initializes leave quota
+        //  - Performance Review Service creates evaluation record
+        //  - Notifaction Service sends welcome message (even just print only or implement email)
     }
 }
