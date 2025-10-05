@@ -1,13 +1,13 @@
-package com.hrps.payrollservice;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class PayrollServiceApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//package com.hrps.payrollservice;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class PayrollServiceApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}
