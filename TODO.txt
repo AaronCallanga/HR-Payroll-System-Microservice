@@ -3,3 +3,4 @@
 3. Implement SAGA
 4. Eureka
 5. Api gateway 
+6. If ever other service need more info about specific employee (not specified in event) then just do grpc request

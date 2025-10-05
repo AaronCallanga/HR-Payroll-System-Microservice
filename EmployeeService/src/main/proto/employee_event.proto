@@ -1,0 +1,12 @@
+//syntax = "proto3";
+//
+//// Use in proto files, this is the package of this specific proto file. To import to other proto file
+//package employee.events;
+//// This is the package where the Java classes will be generated
+//option java_package = "employee.events";
+//
+//// Split our service request and response files all into different files, by default it will put all the generated code to the same file which is a bit messy
+//option java_multiple_files = true;
+//
+//// DONT DO THIS, DO AVRO INSTEAD
+//// ONLY DO GRPC FOR INTER_SERVICE COMMUNICATION, AVRO FOR SENDING TO KAFKA

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HR &amp; Payroll System Microservice.iml" filepath="$PROJECT_DIR$/.idea/HR &amp; Payroll System Microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schema.iml" filepath="$PROJECT_DIR$/schema.iml" />
     </modules>
   </component>
 </project>

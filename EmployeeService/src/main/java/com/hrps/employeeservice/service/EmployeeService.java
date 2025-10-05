@@ -29,7 +29,9 @@ public class EmployeeService {
         Employee employee = employeeRepository.save(EmployeeMapper.toEntity(employeeRequest, department));
 
         EmployeeResponse employeeResponse = EmployeeMapper.toResponse(employee);
-        // Produce Kafka send event to topic "employee-created" (use proto generated class)
+        // TODO:
+        // 1. Create Avro schema for Event, then send it
+        // Produce Kafka send event to topic "employee-created" (use proto generated class/ avro schema)
         //  Listeners:
         //  - Payroll Service create payroll profile
         //  - Leave Service initializes leave quota

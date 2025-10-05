@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "EmployeeEvent",
+  "namespace": "com.hrps.avro.employee",
+  "doc": "Generic event schema for Employee-related actions.",
+  "fields": [
+    { "name": "id", "type": "string", "doc": "UUID of the employee" },
+    { "name": "firstName", "type": ["null", "string"], "default": null },
+    { "name": "lastName", "type": ["null", "string"], "default": null },
+    { "name": "email", "type": ["null", "string"], "default": null },
+    { "name": "departmentName", "type": ["null", "string"], "default": null },
+    { "name": "eventType", "type": "string", "doc": "CREATED, UPDATED, DELETED" }
+  ]
+}
