@@ -26,7 +26,7 @@ public class EmployeeEventProducer {
                                            .setEventType("CREATED")
                                            .build();
 
-        kafkaTemplate.send(TOPIC, event.getId().toString(), event);
+        kafkaTemplate.send(TOPIC, event);
         System.out.println("✅ Sent EmployeeEvent to Kafka: " + event);
     }
 }
