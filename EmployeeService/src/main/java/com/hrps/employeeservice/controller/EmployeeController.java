@@ -4,6 +4,7 @@ import com.hrps.employeeservice.dto.EmployeeRequest;
 import com.hrps.employeeservice.dto.EmployeeResponse;
 import com.hrps.employeeservice.model.Employee;
 import com.hrps.employeeservice.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody EmployeeRequest employeeRequest) {
+    public ResponseEntity<EmployeeResponse> addEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
         return ResponseEntity.ok(employeeService.addEmployee(employeeRequest));
     }
 }
