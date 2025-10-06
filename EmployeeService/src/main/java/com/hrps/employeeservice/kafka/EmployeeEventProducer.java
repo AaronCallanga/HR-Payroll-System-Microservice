@@ -18,12 +18,12 @@ public class EmployeeEventProducer {
 
     public void sendEmployeeCreatedEvent(Employee employee) {
         EmployeeEvent event = EmployeeEvent.newBuilder()
-                                           .setId(UUID.randomUUID().toString())
-                                           .setFirstName("John")
-                                           .setLastName("Doe")
-                                           .setEmail("john@company.com")
-                                           .setDepartmentName("Engineering")
-                                           .setEventType("CREATED")
+                                           .setId(employee.getId().toString())
+                                           .setFirstName(employee.getFirstName())
+                                           .setLastName(employee.getLastName())
+                                           .setEmail(employee.getEmail())
+                                           .setDepartmentName(employee.getDepartment().getName())
+                                           .setEventType(EmployeeEventType.CREATED.name())
                                            .build();
 
         kafkaTemplate.send(TOPIC, event.getId().toString(), event);
