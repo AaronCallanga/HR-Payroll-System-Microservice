@@ -1,4 +1,4 @@
-# docker build -f EmployeeService/Dockerfile -t employee-service . (if building in the root directory)
+# docker build -f payroll-service/Dockerfile -t payroll-service . (if building in the root directory)
 # (uncomment other command when building in the Employeee Service directory)
 # Pull the image of maven including the jdk 21 as our build tool,        AS builder -> allows you to specify steps to build the app
 FROM maven:3.9.9-eclipse-temurin-21 AS builder

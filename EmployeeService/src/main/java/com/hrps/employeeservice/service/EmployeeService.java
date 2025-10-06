@@ -10,6 +10,9 @@ import com.hrps.employeeservice.repository.DepartmentRepository;
 import com.hrps.employeeservice.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EmployeeService {
 
@@ -43,5 +46,11 @@ public class EmployeeService {
         //  - Notifaction Service sends welcome message (even just print only or implement email)
 
         return employeeResponse;
+    }
+
+    public List<EmployeeResponse> getAllEmployees() {
+        return employeeRepository.findAll().stream()
+                                 .map(EmployeeMapper::toResponse)
+                                 .collect(Collectors.toList());
     }
 }
