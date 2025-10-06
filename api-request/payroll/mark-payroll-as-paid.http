@@ -1,4 +1,4 @@
 ### GET request to example server
-PATCH localhost:4001/employee/1/status?status=PAID
+PATCH localhost:4001/payroll/6/status?status=PAID
 
 ###
