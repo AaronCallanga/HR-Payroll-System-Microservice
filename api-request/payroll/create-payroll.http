@@ -1,0 +1,14 @@
+### GET request to example server
+POST http://localhost:4001/payroll
+Content-Type: application/json
+
+{
+  "employeeId": "15ebf051-b064-46f2-83ff-19122692b144",
+  "baseSalary": 70000.00,
+  "bonus": 5000.00,
+  "deductions": 2000.00,
+  "payPeriodStart": "2025-09-01",
+  "payPeriodEnd": "2025-09-30"
+}
+
+###

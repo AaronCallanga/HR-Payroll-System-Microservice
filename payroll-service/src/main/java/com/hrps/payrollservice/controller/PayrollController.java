@@ -3,6 +3,7 @@ package com.hrps.payrollservice.controller;
 import com.hrps.payrollservice.dto.PayrollRequest;
 import com.hrps.payrollservice.dto.PayrollResponse;
 import com.hrps.payrollservice.service.PayrollService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class PayrollController {
      * Create payroll
      */
     @PostMapping
-    public ResponseEntity<PayrollResponse> createPayroll(@RequestBody PayrollRequest request) {
+    public ResponseEntity<PayrollResponse> createPayroll(@Valid @RequestBody PayrollRequest request) {
         PayrollResponse response = payrollService.createPayroll(request);
         return ResponseEntity.ok(response);
     }

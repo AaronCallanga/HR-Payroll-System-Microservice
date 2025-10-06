@@ -1,15 +1,32 @@
 package com.hrps.payrollservice.dto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class PayrollRequest {
+    @NotNull(message = "Employee ID is required")
     private UUID employeeId;
+
+    @NotNull(message = "Base salary is required")
+    @DecimalMin(value = "0.00", inclusive = false, message = "Base salary must be greater than 0")
     private BigDecimal baseSalary;
-    private BigDecimal bonus;
-    private BigDecimal deductions;
+
+    @DecimalMin(value = "0.00", inclusive = true, message = "Bonus cannot be negative")
+    private BigDecimal bonus = BigDecimal.ZERO;
+
+    @DecimalMin(value = "0.00", inclusive = true, message = "Deductions cannot be negative")
+    private BigDecimal deductions = BigDecimal.ZERO;
+
+    @NotNull(message = "Pay period start date is required")
     private LocalDate payPeriodStart;
+
+    @NotNull(message = "Pay period end date is required")
+    @FutureOrPresent(message = "Pay period end date cannot be in the past")
     private LocalDate payPeriodEnd;
 
     public PayrollRequest() {
