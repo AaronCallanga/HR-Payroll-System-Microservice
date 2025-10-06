@@ -15,5 +15,8 @@ public class EmployeeEventConsumer {
         System.out.println("📧 Email: " + event.getEmail());
         System.out.println("🏢 Department: " + event.getDepartmentName());
         System.out.println("📅 Event Type: " + event.getEventType());
+
+        // Create payroll account
+        // maybe talk gRPC with the employee service for more entity information
     }
 }

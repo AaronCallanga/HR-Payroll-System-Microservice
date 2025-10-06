@@ -2,6 +2,7 @@ package com.hrps.employeeservice.service;
 
 import com.hrps.employeeservice.dto.EmployeeRequest;
 import com.hrps.employeeservice.dto.EmployeeResponse;
+import com.hrps.employeeservice.kafka.EmployeeEventProducer;
 import com.hrps.employeeservice.mapper.EmployeeMapper;
 import com.hrps.employeeservice.model.Department;
 import com.hrps.employeeservice.model.Employee;
@@ -14,10 +15,13 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
+    private final EmployeeEventProducer employeeEventProducer;
 
-    public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository,
+                           EmployeeEventProducer employeeEventProducer) {
         this.employeeRepository = employeeRepository;
         this.departmentRepository = departmentRepository;
+        this.employeeEventProducer = employeeEventProducer;
     }
 
     public EmployeeResponse addEmployee(EmployeeRequest employeeRequest) {
@@ -29,9 +33,9 @@ public class EmployeeService {
         Employee employee = employeeRepository.save(EmployeeMapper.toEntity(employeeRequest, department));
 
         EmployeeResponse employeeResponse = EmployeeMapper.toResponse(employee);
-        // TODO:
-        // 1. Create Avro schema for Event, then send it
+
         // Produce Kafka send event to topic "employee-created" (use proto generated class/ avro schema)
+        employeeEventProducer.sendEmployeeCreatedEvent(employee);
         //  Listeners:
         //  - Payroll Service create payroll profile
         //  - Leave Service initializes leave quota
