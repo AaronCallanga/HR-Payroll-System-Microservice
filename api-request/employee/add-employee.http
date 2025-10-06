@@ -1,5 +1,5 @@
 ### POST request to employee service
-GET http://localhost:4000/employee
+POST http://localhost:4000/employee
 Content-Type: application/json
 
 {
