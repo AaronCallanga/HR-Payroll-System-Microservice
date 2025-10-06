@@ -32,6 +32,6 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getEmployees() {
-        return ResponseEntity.ok(employeeService.)
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 }
