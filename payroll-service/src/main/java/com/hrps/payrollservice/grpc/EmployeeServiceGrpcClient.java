@@ -1,8 +1,10 @@
 package com.hrps.payrollservice.grpc;
 
+import employee.EmployeeListResponse;
 import employee.EmployeeRequest;
 import employee.EmployeeResponse;
 import employee.EmployeeServiceGrpc;
+import employee.EmptyRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import net.devh.boot.grpc.client.inject.GrpcClient;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -38,9 +41,18 @@ public class EmployeeServiceGrpcClient {
                 .build();
 
         // 4. Call remote gRPC method
-        EmployeeResponse response = blockingStub.getEmployeeById(request);
-        log.info("Received response from Billing-Service via gRPC {}", response);
-        return response;
+        EmployeeResponse employeeResponse = blockingStub.getEmployeeById(request);
+        log.info("Received response from Employee-Service via gRPC {}", employeeResponse);
+        return employeeResponse;
+    }
+
+    public EmployeeListResponse getAllEmployees() {
+        EmptyRequest emptyRequest = EmptyRequest.newBuilder().build();
+
+        EmployeeListResponse employeeResponseList = blockingStub.getAllEmployeeList(emptyRequest);
+        log.info("Received response from Employee-Service via gRPC {}", employeeResponseList);
+
+        return employeeResponseList;
     }
 
 }
