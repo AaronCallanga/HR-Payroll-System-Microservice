@@ -1,0 +1,1 @@
+1. Kafka communication, use Avro Schema. Inter-service communication, use gRPC

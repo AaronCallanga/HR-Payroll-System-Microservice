@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+
+// Use in proto files, this is the package of this specific proto file. To import to other proto file
+package employee;
+// This is the package where the Java classes will be generated
+option java_package = "employee";
+
+// Split our service request and response files all into different files, by default it will put all the generated code to the same file which is a bit messy
+option java_multiple_files = true;
+
+
+// ----- REQUESTS -----
+message EmployeeRequest {
+  string id = 1;
+}
+
+// For get all
+message EmptyRequest {}
+
+// ----- RESPONSES -----
+
+message EmployeeResponse {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string phoneNumber = 5;
+  string hireDate = 6;     // YYYY-MM-DD format
+  string role = 7;
+  double salary = 8;
+  string status = 9;       // ACTIVE / INACTIVE
+  string department = 10;  // Department name
+}
+
+// ----- LIST RESPONSE -----
+
+message EmployeeListResponse {
+  repeated EmployeeResponse employees = 1;
+}
+
+service EmployeeService {
+  rpc GetEmployeeById(EmployeeRequest) returns (EmployeeResponse);
+  rpc GetAllEmployeeList(EmptyRequest) returns (EmployeeListResponse);
+}
