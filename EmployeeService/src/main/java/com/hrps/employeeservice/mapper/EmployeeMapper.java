@@ -66,4 +66,29 @@ public class EmployeeMapper {
 
         return employee;
     }
+
+    public static employee.EmployeeResponse toEmployeeResponse(Employee employeeEntity) {
+        if (employeeEntity == null) {
+            return employee.EmployeeResponse.getDefaultInstance();
+        }
+
+        // Handle department name safely
+        String departmentName = (employeeEntity.getDepartment() != null)
+                ? employeeEntity.getDepartment().getName()
+                : "";
+
+        // Convert to proto message
+        return employee.EmployeeResponse.newBuilder()
+                               .setId(employeeEntity.getId().toString())
+                               .setFirstName(employeeEntity.getFirstName() != null ? employeeEntity.getFirstName() : "")
+                               .setLastName(employeeEntity.getLastName() != null ? employeeEntity.getLastName() : "")
+                               .setEmail(employeeEntity.getEmail() != null ? employeeEntity.getEmail() : "")
+                               .setPhoneNumber(employeeEntity.getPhoneNumber() != null ? employeeEntity.getPhoneNumber() : "")
+                               .setHireDate(employeeEntity.getHireDate() != null ? employeeEntity.getHireDate().toString() : "")
+                               .setRole(employeeEntity.getRole() != null ? employeeEntity.getRole() : "")
+                               .setSalary(employeeEntity.getSalary() != null ? employeeEntity.getSalary() : 0.0)
+                               .setStatus(employeeEntity.getStatus() != null ? employeeEntity.getStatus() : "ACTIVE")
+                               .setDepartment(departmentName)
+                               .build();
+    }
 }
