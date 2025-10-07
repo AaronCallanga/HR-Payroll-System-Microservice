@@ -80,7 +80,7 @@
 		</dependency>
 		<dependency>
 			<groupId>net.devh</groupId>
-			<artifactId>grpc-spring-boot-starter</artifactId>
+			<artifactId>grpc-spring-boot-starter</artifactId>	<!-- Bundle gRPC client and server -->
 			<version>3.1.0.RELEASE</version>
 		</dependency>
 

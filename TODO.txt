@@ -6,12 +6,4 @@
 6. If ever other service need more info about specific employee (not specified in event) then just do grpc request
 7. Would you like me to include an optional multi-module Maven parent pom.xml setup next?
 It’ll make building all modules (like schema, employee-service, etc.) easier with a single mvn clean install before Docker builds.
-8. Only send this data in create payroll, then talk payroll-service with gRPC employee-service to get the base salary and other info
-POST /api/payroll
-{
-  "employeeId": "8b2e9651-36f1-4423-b06d-1f9a10bfb450",
-  "bonus": 5000,
-  "deductions": 1000,
-  "payPeriodStart": "2025-09-01",
-  "payPeriodEnd": "2025-09-30"
-}
+8. Try to lessen the data send to gRPC, just create many methods that satisfy the needs, no need to send all the data. e.g get all active employee, only send the base salary and id, only send email name id, etc.

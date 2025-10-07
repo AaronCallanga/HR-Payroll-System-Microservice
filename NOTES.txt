@@ -1,1 +1,19 @@
 1. Kafka communication, use Avro Schema. Inter-service communication, use gRPC
+2.		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-spring-boot-starter</artifactId>	<!-- Bundle gRPC client and server -->
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+- Automatically starts a gRPC server at default port (9090)
+- It is recommendable separate the bundle and only use what you need (server or client)
+    <dependency>
+      <groupId>net.devh</groupId>
+      <artifactId>grpc-server-spring-boot-starter</artifactId>
+      <version>3.1.0.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.devh</groupId>
+      <artifactId>grpc-client-spring-boot-starter</artifactId>
+      <version>3.1.0.RELEASE</version>
+      <scope>compile</scope>

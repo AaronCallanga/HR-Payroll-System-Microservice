@@ -23,8 +23,8 @@ public class EmployeeServiceGrpcClient {
 
     private final EmployeeServiceGrpc.EmployeeServiceBlockingStub blockingStub;
 
-    public EmployeeServiceGrpcClient(@Value("${employee.service.address:localhost}") String serverAddress,
-                                    @Value("${employee.service.grpc.port:9090}") int serverPort) {
+    public EmployeeServiceGrpcClient(@Value("${employee.service.address}") String serverAddress,
+                                    @Value("${employee.service.grpc.port}") int serverPort) {
         log.info("Connecting to Employee Service gRPC server at {}:{}", serverAddress, serverPort);
         // 1. Create channel to BillingService
         ManagedChannel channel = ManagedChannelBuilder.forAddress(serverAddress, serverPort)

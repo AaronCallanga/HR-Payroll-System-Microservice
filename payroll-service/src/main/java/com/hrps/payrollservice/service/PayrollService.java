@@ -29,7 +29,9 @@ public class PayrollService {
      */
     public PayrollResponse createPayroll(PayrollRequest request) {
         EmployeeResponse employeeResponse = employeeServiceGrpcClient.getEmployee(request.getEmployeeId());
+
         Payroll payroll = PayrollMapper.toEntity(request, employeeResponse);
+
         Payroll savedPayroll = payrollRepository.save(payroll);
         return PayrollMapper.toResponse(savedPayroll);
     }
