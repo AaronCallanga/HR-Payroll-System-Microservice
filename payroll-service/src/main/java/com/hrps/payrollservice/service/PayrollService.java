@@ -2,9 +2,11 @@ package com.hrps.payrollservice.service;
 
 import com.hrps.payrollservice.dto.PayrollRequest;
 import com.hrps.payrollservice.dto.PayrollResponse;
+import com.hrps.payrollservice.grpc.EmployeeServiceGrpcClient;
 import com.hrps.payrollservice.mapper.PayrollMapper;
 import com.hrps.payrollservice.model.Payroll;
 import com.hrps.payrollservice.repository.PayrollRepository;
+import employee.EmployeeResponse;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +17,18 @@ import java.util.stream.Collectors;
 @Service
 public class PayrollService {
     private final PayrollRepository payrollRepository;
+    private final EmployeeServiceGrpcClient employeeServiceGrpcClient;
 
-    public PayrollService(PayrollRepository payrollRepository) {
+    public PayrollService(PayrollRepository payrollRepository, EmployeeServiceGrpcClient employeeServiceGrpcClient) {
         this.payrollRepository = payrollRepository;
+        this.employeeServiceGrpcClient = employeeServiceGrpcClient;
     }
 
     /**
      * Create a new payroll entry
      */
     public PayrollResponse createPayroll(PayrollRequest request) {
-        // EmployeeResponse is through gRPC
+        EmployeeResponse employeeResponse = employeeServiceGrpcClient.getEmployee(request.getEmployeeId());
         Payroll payroll = PayrollMapper.toEntity(request, employeeResponse);
         Payroll savedPayroll = payrollRepository.save(payroll);
         return PayrollMapper.toResponse(savedPayroll);

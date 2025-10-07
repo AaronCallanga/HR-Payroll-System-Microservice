@@ -3,28 +3,30 @@ package com.hrps.payrollservice.mapper;
 import com.hrps.payrollservice.dto.PayrollRequest;
 import com.hrps.payrollservice.dto.PayrollResponse;
 import com.hrps.payrollservice.model.Payroll;
+import employee.EmployeeResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class PayrollMapper {
     /**
      * Converts a PayrollRequest DTO into a Payroll entity.
      * Calculates the netPay = baseSalary + bonus - deductions.
      */
-    public static Payroll toEntity(PayrollRequest request) {
+    public static Payroll toEntity(PayrollRequest request, EmployeeResponse employeeResponse) {
         if (request == null) {
             return null;
         }
 
         Payroll payroll = new Payroll();
-        payroll.setEmployeeId(request.getEmployeeId());
-        payroll.setBaseSalary(request.getBaseSalary());
+        payroll.setEmployeeId(UUID.fromString(employeeResponse.getId()));
+        payroll.setBaseSalary(BigDecimal.valueOf(employeeResponse.getSalary()));
         payroll.setBonus(request.getBonus() != null ? request.getBonus() : BigDecimal.ZERO);
         payroll.setDeductions(request.getDeductions() != null ? request.getDeductions() : BigDecimal.ZERO);
 
         // Calculate net pay
-        BigDecimal netPay = request.getBaseSalary()
+        BigDecimal netPay = BigDecimal.valueOf(employeeResponse.getSalary())
                                    .add(payroll.getBonus())
                                    .subtract(payroll.getDeductions());
         payroll.setNetPay(netPay);
@@ -66,19 +68,19 @@ public class PayrollMapper {
      * Updates an existing Payroll entity with new data from PayrollRequest.
      * Useful for PUT/PATCH operations.
      */
-    public static void updateEntity(Payroll payroll, PayrollRequest request) {
+    public static void updateEntity(Payroll payroll, PayrollRequest request, EmployeeResponse employeeResponse) {
         if (payroll == null || request == null) {
             return;
         }
 
-        payroll.setBaseSalary(request.getBaseSalary());
+        payroll.setBaseSalary(BigDecimal.valueOf(employeeResponse.getSalary()));
         payroll.setBonus(request.getBonus() != null ? request.getBonus() : BigDecimal.ZERO);
         payroll.setDeductions(request.getDeductions() != null ? request.getDeductions() : BigDecimal.ZERO);
         payroll.setPayPeriodStart(request.getPayPeriodStart());
         payroll.setPayPeriodEnd(request.getPayPeriodEnd());
 
         // Recalculate net pay
-        BigDecimal netPay = request.getBaseSalary()
+        BigDecimal netPay = BigDecimal.valueOf(employeeResponse.getSalary())
                                    .add(payroll.getBonus())
                                    .subtract(payroll.getDeductions());
         payroll.setNetPay(netPay);
