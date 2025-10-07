@@ -41,7 +41,7 @@ public class EmployeeService {
         // Produce Kafka send event to topic "employee-created" (use proto generated class/ avro schema)
         employeeEventProducer.sendEmployeeCreatedEvent(employee);
         //  Listeners:
-        //  - Payroll Service create payroll profile
+        //  - Payroll Service create payroll profile (OPTIONAL)
         //  - Leave Service initializes leave quota
         //  - Performance Review Service creates evaluation record
         //  - Notifaction Service sends welcome message (even just print only or implement email)

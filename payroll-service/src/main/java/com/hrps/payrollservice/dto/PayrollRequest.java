@@ -12,9 +12,10 @@ public class PayrollRequest {
     @NotNull(message = "Employee ID is required")
     private UUID employeeId;
 
-    @NotNull(message = "Base salary is required")
-    @DecimalMin(value = "0.00", inclusive = false, message = "Base salary must be greater than 0")
-    private BigDecimal baseSalary;
+    // Get through gRPC communication
+//    @NotNull(message = "Base salary is required")
+//    @DecimalMin(value = "0.00", inclusive = false, message = "Base salary must be greater than 0")
+//    private BigDecimal baseSalary;
 
     @DecimalMin(value = "0.00", inclusive = true, message = "Bonus cannot be negative")
     private BigDecimal bonus = BigDecimal.ZERO;
@@ -33,13 +34,11 @@ public class PayrollRequest {
     }
 
     public PayrollRequest(UUID employeeId,
-                          BigDecimal baseSalary,
                           BigDecimal bonus,
                           BigDecimal deductions,
                           LocalDate payPeriodStart,
                           LocalDate payPeriodEnd) {
         this.employeeId = employeeId;
-        this.baseSalary = baseSalary;
         this.bonus = bonus;
         this.deductions = deductions;
         this.payPeriodStart = payPeriodStart;
@@ -52,14 +51,6 @@ public class PayrollRequest {
 
     public void setEmployeeId(UUID employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public BigDecimal getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(BigDecimal baseSalary) {
-        this.baseSalary = baseSalary;
     }
 
     public BigDecimal getBonus() {
