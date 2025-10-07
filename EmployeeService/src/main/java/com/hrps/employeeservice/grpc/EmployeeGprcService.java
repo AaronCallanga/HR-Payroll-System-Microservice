@@ -37,6 +37,14 @@ public class EmployeeGprcService extends EmployeeServiceGrpc.EmployeeServiceImpl
 
     @Override
     public void getAllEmployeeList(EmptyRequest request, StreamObserver<EmployeeListResponse> responseObserver) {
+        List<Employee> employees = employeeRepository.findAll();
 
+        EmployeeListResponse.Builder responseBuilder = EmployeeListResponse.newBuilder();
+        for (Employee e : employees) {
+            responseBuilder.addEmployees(EmployeeMapper.toEmployeeResponse(e));
+        }
+
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
     }
 }
