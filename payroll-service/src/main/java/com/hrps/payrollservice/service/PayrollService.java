@@ -24,7 +24,8 @@ public class PayrollService {
      * Create a new payroll entry
      */
     public PayrollResponse createPayroll(PayrollRequest request) {
-        Payroll payroll = PayrollMapper.toEntity(request);
+        // EmployeeResponse is through gRPC
+        Payroll payroll = PayrollMapper.toEntity(request, employeeResponse);
         Payroll savedPayroll = payrollRepository.save(payroll);
         return PayrollMapper.toResponse(savedPayroll);
     }
