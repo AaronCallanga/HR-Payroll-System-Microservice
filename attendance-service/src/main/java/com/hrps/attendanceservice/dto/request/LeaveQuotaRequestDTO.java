@@ -1,4 +1,4 @@
-package com.hrps.attendanceservice.dto;
+package com.hrps.attendanceservice.dto.request;
 
 import java.util.UUID;
 
