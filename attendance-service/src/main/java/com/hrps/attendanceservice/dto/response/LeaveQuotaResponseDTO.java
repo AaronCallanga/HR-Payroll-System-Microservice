@@ -1,4 +1,4 @@
-package com.hrps.attendanceservice.dto;
+package com.hrps.attendanceservice.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
