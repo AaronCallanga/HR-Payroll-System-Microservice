@@ -5,24 +5,26 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * DTO representing a completed leave record.
+ * DTO returned after leave request is processed.
  */
-public class LeaveHistoryResponseDTO {
+public class LeaveRequestResponseDTO {
     private UUID id;
     private UUID employeeId;
-    private String leaveType; // e.g., Vacation, Sick
+    private String leaveType;
     private LocalDate startDate;
     private LocalDate endDate;
     private int totalDays;
     private String reason;
-    private String status; // APPROVED
+    private String status; // PENDING, APPROVED, REJECTED
+    private String approver;
+    private LocalDateTime decisionDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public LeaveHistoryResponseDTO() {
+    public LeaveRequestResponseDTO() {
     }
 
-    public LeaveHistoryResponseDTO(UUID id,
+    public LeaveRequestResponseDTO(UUID id,
                                    UUID employeeId,
                                    String leaveType,
                                    LocalDate startDate,
@@ -30,6 +32,8 @@ public class LeaveHistoryResponseDTO {
                                    int totalDays,
                                    String reason,
                                    String status,
+                                   String approver,
+                                   LocalDateTime decisionDate,
                                    LocalDateTime createdAt,
                                    LocalDateTime updatedAt) {
         this.id = id;
@@ -40,6 +44,8 @@ public class LeaveHistoryResponseDTO {
         this.totalDays = totalDays;
         this.reason = reason;
         this.status = status;
+        this.approver = approver;
+        this.decisionDate = decisionDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -106,6 +112,22 @@ public class LeaveHistoryResponseDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getApprover() {
+        return approver;
+    }
+
+    public void setApprover(String approver) {
+        this.approver = approver;
+    }
+
+    public LocalDateTime getDecisionDate() {
+        return decisionDate;
+    }
+
+    public void setDecisionDate(LocalDateTime decisionDate) {
+        this.decisionDate = decisionDate;
     }
 
     public LocalDateTime getCreatedAt() {
