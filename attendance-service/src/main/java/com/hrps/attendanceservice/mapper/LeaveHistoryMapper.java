@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 
 public class LeaveHistoryMapper {
 
+    /**
+     * Converts a LeaveHistory entity to its corresponding response DTO.
+     * @param entity LeaveHistory entity from database
+     * @return LeaveHistoryResponse for API response
+     */
     public static LeaveHistoryResponseDTO toResponseDTO(LeaveHistory entity) {
         if (entity == null) return null;
 
@@ -23,6 +28,11 @@ public class LeaveHistoryMapper {
         return dto;
     }
 
+    /**
+     * Converts a LeaveHistory entity to its corresponding response DTO.
+     * @param entities List of LeaveHistory entity from database
+     * @return List of LeaveHistoryResponseDTO for API response
+     */
     public static List<LeaveHistoryResponseDTO> toResponseDTOList(List<LeaveHistory> entities) {
         if (entities == null) return List.of();
         return entities.stream().map(LeaveHistoryMapper::toResponseDTO).collect(Collectors.toList());
