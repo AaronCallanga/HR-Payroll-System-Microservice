@@ -7,13 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="schema" />
-        <module name="employee-service" />
         <module name="payroll-service" />
+        <module name="attendance-service" />
+        <module name="employee-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="attendance-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="payroll-service" options="-parameters" />
     </option>

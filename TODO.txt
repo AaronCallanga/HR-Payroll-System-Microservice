@@ -7,3 +7,4 @@
 7. Would you like me to include an optional multi-module Maven parent pom.xml setup next?
 It’ll make building all modules (like schema, employee-service, etc.) easier with a single mvn clean install before Docker builds.
 8. Try to lessen the data send to gRPC, just create many methods that satisfy the needs, no need to send all the data. e.g get all active employee, only send the base salary and id, only send email name id, etc.
+9. V3__add_leave_history_table.sql next — to track leave requests, approvals, and balances for each employee? It fits well as the next step in your microservice expansion.
