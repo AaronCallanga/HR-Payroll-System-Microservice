@@ -16,8 +16,6 @@ public class LeaveHistoryResponseDTO {
     private int totalDays;
     private String reason;
     private String status; // APPROVED
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public LeaveHistoryResponseDTO() {
     }
@@ -29,9 +27,7 @@ public class LeaveHistoryResponseDTO {
                                    LocalDate endDate,
                                    int totalDays,
                                    String reason,
-                                   String status,
-                                   LocalDateTime createdAt,
-                                   LocalDateTime updatedAt) {
+                                   String status) {
         this.id = id;
         this.employeeId = employeeId;
         this.leaveType = leaveType;
@@ -40,8 +36,6 @@ public class LeaveHistoryResponseDTO {
         this.totalDays = totalDays;
         this.reason = reason;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public UUID getId() {
@@ -108,19 +102,4 @@ public class LeaveHistoryResponseDTO {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

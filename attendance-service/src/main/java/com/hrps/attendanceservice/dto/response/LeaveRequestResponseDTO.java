@@ -15,11 +15,9 @@ public class LeaveRequestResponseDTO {
     private LocalDate endDate;
     private int totalDays;
     private String reason;
-    private String status; // PENDING, APPROVED, REJECTED
+    private String status;
     private String approver;
     private LocalDateTime decisionDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public LeaveRequestResponseDTO() {
     }
@@ -33,9 +31,7 @@ public class LeaveRequestResponseDTO {
                                    String reason,
                                    String status,
                                    String approver,
-                                   LocalDateTime decisionDate,
-                                   LocalDateTime createdAt,
-                                   LocalDateTime updatedAt) {
+                                   LocalDateTime decisionDate) {
         this.id = id;
         this.employeeId = employeeId;
         this.leaveType = leaveType;
@@ -46,8 +42,6 @@ public class LeaveRequestResponseDTO {
         this.status = status;
         this.approver = approver;
         this.decisionDate = decisionDate;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public UUID getId() {
@@ -128,21 +122,5 @@ public class LeaveRequestResponseDTO {
 
     public void setDecisionDate(LocalDateTime decisionDate) {
         this.decisionDate = decisionDate;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
