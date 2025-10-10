@@ -38,6 +38,7 @@ public class LeaveRequestService {
      * Approves or rejects a leave request.
      */
     // Should send event (to notify the employee by email, etc)
+    // Send async call for leave history to log it (or consume event? ask for design)
     public LeaveRequestResponseDTO updateStatus(UUID requestId, String status, String approver) {
         LeaveRequest request = leaveRequestRepository.findById(requestId)
                                                      .orElseThrow(() -> new RuntimeException("Leave request not found: " + requestId));
