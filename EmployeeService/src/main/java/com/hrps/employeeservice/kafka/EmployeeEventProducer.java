@@ -10,7 +10,7 @@ import java.util.UUID;
 @Service
 public class EmployeeEventProducer {
     private final KafkaTemplate<String, EmployeeEvent> kafkaTemplate;
-    private static final String TOPIC = "employee.events";
+    private static final String CREATED_TOPIC = "employee.events.created";
 
     public EmployeeEventProducer(KafkaTemplate<String, EmployeeEvent> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
@@ -26,7 +26,7 @@ public class EmployeeEventProducer {
                                            .setEventType(EmployeeEventType.CREATED.name())
                                            .build();
 
-        kafkaTemplate.send(TOPIC, event.getId().toString(), event);
+        kafkaTemplate.send(CREATED_TOPIC, event.getId().toString(), event);
         System.out.println("✅ Sent EmployeeEvent to Kafka: " + event);
     }
 }

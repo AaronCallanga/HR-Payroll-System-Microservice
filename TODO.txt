@@ -10,3 +10,4 @@ It’ll make building all modules (like schema, employee-service, etc.) easier w
 10. Scheduled task: create a new leave quota per month/year per employee, clean up or archive histories/logs/audits
 11. After approving leave request, send event or do async calls (update the quota, create leave history)
 12. Might as well separate attendance and leave service, and create attendance account table
+13. Specify the employee events topic, not just employee.event. Try employee.event.created

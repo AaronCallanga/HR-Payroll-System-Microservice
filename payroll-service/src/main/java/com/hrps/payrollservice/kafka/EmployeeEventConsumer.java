@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeEventConsumer {
 
-    @KafkaListener(topics = "employee.events", groupId = "employee-consumer-group")
+    @KafkaListener(topics = "employee.events.created", groupId = "payroll-consumer-group")
     public void consume(EmployeeEvent event) {
         System.out.println("📩 Received EmployeeEvent from Kafka:");
         System.out.println("🧍 ID: " + event.getId());
