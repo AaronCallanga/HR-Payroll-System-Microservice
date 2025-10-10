@@ -6,17 +6,17 @@ import java.util.UUID;
 /**
  * DTO used when employee submits a leave request.
  */
-public class LeaveRequestDTO {
+public class LeaveRequestRequestDTO {
     private UUID employeeId;
     private String leaveType;
     private LocalDate startDate;
     private LocalDate endDate;
     private String reason;
 
-    public LeaveRequestDTO() {
+    public LeaveRequestRequestDTO() {
     }
 
-    public LeaveRequestDTO(UUID employeeId, String leaveType, LocalDate startDate, LocalDate endDate, String reason) {
+    public LeaveRequestRequestDTO(UUID employeeId, String leaveType, LocalDate startDate, LocalDate endDate, String reason) {
         this.employeeId = employeeId;
         this.leaveType = leaveType;
         this.startDate = startDate;

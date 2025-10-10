@@ -1,6 +1,6 @@
 package com.hrps.attendanceservice.mapper;
 
-import com.hrps.attendanceservice.dto.request.LeaveRequestDTO;
+import com.hrps.attendanceservice.dto.request.LeaveRequestRequestDTO;
 import com.hrps.attendanceservice.dto.response.LeaveRequestListResponseDTO;
 import com.hrps.attendanceservice.dto.response.LeaveRequestResponseDTO;
 import com.hrps.attendanceservice.entity.LeaveRequest;
@@ -16,7 +16,7 @@ public class LeaveRequestMapper {
      * @param dto The incoming leave request from the API
      * @return LeaveRequest entity ready to be persisted
      */
-    public static LeaveRequest toEntity(LeaveRequestDTO dto) {
+    public static LeaveRequest toEntity(LeaveRequestRequestDTO dto) {
         if (dto == null) return null;
 
         LeaveRequest entity = new LeaveRequest();
