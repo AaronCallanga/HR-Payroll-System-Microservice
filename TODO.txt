@@ -9,3 +9,4 @@ It’ll make building all modules (like schema, employee-service, etc.) easier w
 8. Try to lessen the data send to gRPC, just create many methods that satisfy the needs, no need to send all the data. e.g get all active employee, only send the base salary and id, only send email name id, etc.
 10. Scheduled task: create a new leave quota per month/year per employee, clean up or archive histories/logs/audits
 11. After approving leave request, send event or do async calls (update the quota, create leave history)
+12. Might as well separate attendance and leave service, and create attendance account table

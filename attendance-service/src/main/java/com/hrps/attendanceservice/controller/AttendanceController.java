@@ -13,7 +13,7 @@ import java.util.UUID;
  * Manages attendance tracking for employees.
  */
 @RestController
-@RequestMapping("/api/attendance")
+@RequestMapping("/attendance")
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
