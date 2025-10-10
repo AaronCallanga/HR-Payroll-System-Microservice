@@ -1,0 +1,4 @@
+### GET request to example server
+GET http://localhost:4002/leave-quotas/a4457f7f-3394-471d-bcf7-005e44fdb5df
+
+###

@@ -10,6 +10,7 @@ import java.util.UUID;
 @Service
 public class EmployeeEventProducer {
     private final KafkaTemplate<String, EmployeeEvent> kafkaTemplate;
+    // <domain>.<entity>.<action> -> topic naming convention
     private static final String CREATED_TOPIC = "employee.events.created";
 
     public EmployeeEventProducer(KafkaTemplate<String, EmployeeEvent> kafkaTemplate) {
