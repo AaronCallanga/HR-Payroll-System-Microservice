@@ -24,7 +24,7 @@ public class LeaveQuotaService {
     /**
      * Initializes leave quota for a newly created employee (used by Kafka consumer).
      */
-    // Should be kafka consumer
+    // Should be kafka consumer, and return void
     public LeaveQuotaResponseDTO initializeLeaveQuota(UUID employeeId) {
         LeaveQuota quota = new LeaveQuota();
         quota.setEmployeeId(employeeId);
