@@ -24,6 +24,7 @@ public class LeaveHistoryService {
     /**
      * Logs a leave to history after approval. / Update the history after "APPROVED"
      */
+    // A kafka consumer or called by async calls
     public LeaveHistoryResponseDTO logLeave(LeaveHistory entity) {
         LeaveHistory saved = leaveHistoryRepository.save(entity);
         return LeaveHistoryMapper.toResponseDTO(saved);
