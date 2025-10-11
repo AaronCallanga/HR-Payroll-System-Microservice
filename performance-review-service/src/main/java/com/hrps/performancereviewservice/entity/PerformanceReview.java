@@ -13,11 +13,11 @@ public class PerformanceReview {
     private Long id;
 
     private UUID employeeId;
-    private String reviewPeriod;
+    private String reviewPeriod;    // Initial Evaluation, Probation Review, Mid-Year Review, Annual Review, Project-Based Review
     private String reviewer;
     private Double score;
     private String comments;
-    private String status;
+    private String status;   // PENDING, IN_PROGRESS, COMPLETED, REJECTED, ON_HOLD
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
