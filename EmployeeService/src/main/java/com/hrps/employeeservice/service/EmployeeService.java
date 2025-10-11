@@ -42,7 +42,7 @@ public class EmployeeService {
         employeeEventProducer.sendEmployeeCreatedEvent(employee);
         //  Listeners:
         //  - Payroll Service create payroll profile (OPTIONAL)
-        //  - Leave Service initializes leave quota
+        //  - Leave Service initializes leave quota  - DONE
         //  - Performance Review Service creates evaluation record
         //  - Notifaction Service sends welcome message (even just print only or implement email)
 
