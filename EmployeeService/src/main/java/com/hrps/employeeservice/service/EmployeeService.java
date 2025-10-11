@@ -44,7 +44,7 @@ public class EmployeeService {
         //  - Payroll Service create payroll profile (OPTIONAL)
         //  - Leave Service initializes leave quota  - DONE
         //  - Performance Review Service creates evaluation record - DONE
-        //  - Notifaction Service sends welcome message (even just print only or implement email)
+        //  - Notifaction Service sends welcome message (even just print only or implement email) - DONE
 
         return employeeResponse;
     }

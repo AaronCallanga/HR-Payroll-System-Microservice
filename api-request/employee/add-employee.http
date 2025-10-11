@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "firstName": "Aaron",
   "lastName": "Callanga",
-  "email": "aaroncallanga1@example.com",
+  "email": "onepercentpush@gmail.com",
   "phoneNumber": "+639171234567",
   "hireDate": "2024-05-10",
   "role": "Software Engineer",
@@ -13,4 +13,4 @@ Content-Type: application/json
   "status": "ACTIVE",
   "departmentId": 1
 }
-###
+### aaroncallanga1@example.com
