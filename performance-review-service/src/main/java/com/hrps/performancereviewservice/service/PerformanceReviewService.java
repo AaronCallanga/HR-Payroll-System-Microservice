@@ -43,8 +43,8 @@ public class PerformanceReviewService {
         return PerformanceReviewMapper.toListResponse(reviews);
     }
 
-    public List<PerformanceReviewResponseDTO> getAllReviews() {
-        List<PerformanceReview> reviews = repository.findAll();
+    public List<PerformanceReviewResponseDTO> getAllReviewsByEmployeeId(UUID employeeId) {
+        List<PerformanceReview> reviews = repository.findByEmployeeId(employeeId);
         return PerformanceReviewMapper.toListResponse(reviews);
     }
 
