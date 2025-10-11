@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "firstName": "Aaron",
   "lastName": "Callanga",
-  "email": "aaroncallanga@example.com",
+  "email": "aaroncallanga1@example.com",
   "phoneNumber": "+639171234567",
   "hireDate": "2024-05-10",
   "role": "Software Engineer",
