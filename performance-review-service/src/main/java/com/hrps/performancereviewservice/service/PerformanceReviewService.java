@@ -7,6 +7,7 @@ import com.hrps.performancereviewservice.mapper.PerformanceReviewMapper;
 import com.hrps.performancereviewservice.repository.PerformanceReviewRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,6 +38,10 @@ public class PerformanceReviewService {
         return PerformanceReviewMapper.toResponse(review);
     }
 
+    public List<PerformanceReviewResponseDTO> getAllReviews() {
+        List<PerformanceReview> reviews = repository.findAll();
+        return PerformanceReviewMapper.toListResponse(reviews);
+    }
 
 
     // Create other operation, and admin update status after giving review
