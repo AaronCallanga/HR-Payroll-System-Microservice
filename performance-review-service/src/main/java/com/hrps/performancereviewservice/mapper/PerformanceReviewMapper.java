@@ -4,6 +4,10 @@ import com.hrps.performancereviewservice.dto.PerformanceReviewRequestDTO;
 import com.hrps.performancereviewservice.dto.PerformanceReviewResponseDTO;
 import com.hrps.performancereviewservice.entity.PerformanceReview;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PerformanceReviewMapper {
 
     // Convert request to entity
@@ -29,5 +33,12 @@ public class PerformanceReviewMapper {
         res.setComments(review.getComments());
         res.setStatus(review.getStatus());
         return res;
+    }
+
+    // Convert a List of PerformanceReview entities to List of PerformanceReviewResponseDTO
+    public static List<PerformanceReviewResponseDTO> toListResponse(List<PerformanceReview> reviews) {
+        return reviews.stream()
+                      .map(PerformanceReviewMapper::toResponse)
+                      .collect(Collectors.toList());
     }
 }
