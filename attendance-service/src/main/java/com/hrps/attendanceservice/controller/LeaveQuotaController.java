@@ -12,7 +12,7 @@ import java.util.UUID;
  * Handles all operations related to employee leave quotas.
  */
 @RestController
-@RequestMapping("/leave-quotas")
+@RequestMapping("/attendance/leave-quotas")
 public class LeaveQuotaController {
 
     private final LeaveQuotaService leaveQuotaService;

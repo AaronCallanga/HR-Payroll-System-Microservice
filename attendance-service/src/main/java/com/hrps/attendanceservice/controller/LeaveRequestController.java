@@ -14,7 +14,7 @@ import java.util.UUID;
  * Handles employee leave request submissions and approvals.
  */
 @RestController
-@RequestMapping("/leave-requests")
+@RequestMapping("/attendance/leave-requests")
 public class LeaveRequestController {
 
     private final LeaveRequestService leaveRequestService;

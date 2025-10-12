@@ -12,7 +12,7 @@ import java.util.UUID;
  * Displays leave history for reporting and employee tracking.
  */
 @RestController
-@RequestMapping("/api/leave-history")
+@RequestMapping("/attendance/leave-history")
 public class LeaveHistoryController {
 
     private final LeaveHistoryService leaveHistoryService;
