@@ -16,3 +16,4 @@ It’ll make building all modules (like schema, employee-service, etc.) easier w
 14. Attendance Service schema update attendance table:   check_in TIMESTAMP, check_out TIMESTAMP,
 15. implement scheduling, multithreading (virtual thread), async task, batch processing, and etc...
 16. Auth Service JWT
+17. Implement centralize swagger
