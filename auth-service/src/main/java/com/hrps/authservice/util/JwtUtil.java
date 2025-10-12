@@ -1,5 +1,6 @@
 package com.hrps.authservice.util;
 
+import com.hrps.authservice.entity.Role;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -12,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Set;
 
 @Component
 public class JwtUtil {
@@ -22,10 +24,10 @@ public class JwtUtil {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String email, String role) {
+    public String generateToken(String email, Set<Role> roles) {
         return Jwts.builder()
                    .subject(email)
-                   .claim("role", role)
+                   .claim("role", roles)
                    .issuedAt(new Date())
                    .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
                    .signWith(secretKey)
