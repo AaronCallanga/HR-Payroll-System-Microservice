@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="schema" />
         <module name="performance-review-service" />
+        <module name="auth-service" />
         <module name="payroll-service" />
         <module name="attendance-service" />
         <module name="api-gateway" />
@@ -21,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="attendance-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="notification-service" options="-parameters" />
