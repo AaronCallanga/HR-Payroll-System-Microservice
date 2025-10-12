@@ -10,6 +10,7 @@
         <module name="performance-review-service" />
         <module name="payroll-service" />
         <module name="attendance-service" />
+        <module name="api-gateway" />
         <module name="eureka-server" />
         <module name="notification-service" />
         <module name="employee-service" />
@@ -18,6 +19,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="attendance-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
