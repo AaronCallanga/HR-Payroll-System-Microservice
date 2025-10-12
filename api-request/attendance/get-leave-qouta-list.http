@@ -1,4 +1,4 @@
 ### GET request to example server
-GET http://localhost:4002/leave-quotas
+GET http://localhost:4002/attendance/leave-quotas
 
 ###
