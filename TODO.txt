@@ -1,8 +1,8 @@
 1. Create config server
 2. Test creating lots of container for a specific service and let eureka load balance it. When a service receives a request, log it
 3. Implement SAGA
-4. Eureka
-5. Api gateway 
+4. Eureka ( w/ replication, even in the microservices)
+5. Api gateway (w/ replication too)
 6. If ever other service need more info about specific employee (not specified in event) then just do grpc request
 7. Would you like me to include an optional multi-module Maven parent pom.xml setup next?
 It’ll make building all modules (like schema, employee-service, etc.) easier with a single mvn clean install before Docker builds.
