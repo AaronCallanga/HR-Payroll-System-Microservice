@@ -1,5 +1,5 @@
 ### GET request to example server
 GET http://localhost:8080/api/v1/performance-reviews/9576cb1d-d3d9-44e6-9c4c-ed8a39b54e94
-
+Authorization: Bearer {{token}}
 ###
 

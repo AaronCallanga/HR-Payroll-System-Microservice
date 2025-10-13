@@ -5,8 +5,10 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Component
 public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
     private final WebClient webClient;
@@ -30,7 +32,7 @@ public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFact
             }
 
             return webClient.get()
-                            .uri("/validate")
+                            .uri("/auth/validate")
                             .header(HttpHeaders.AUTHORIZATION, token)       // set the request header
                             .retrieve()                                     // retrieve the response
                             .toBodilessEntity()                             // tell the client that there is no body in the resposne
