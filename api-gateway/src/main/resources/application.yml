@@ -44,3 +44,7 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
 
+# Auth Service URL
+auth:
+  service:
+    url: ${AUTH_SERVICE_URL:http://localhost:4005}
