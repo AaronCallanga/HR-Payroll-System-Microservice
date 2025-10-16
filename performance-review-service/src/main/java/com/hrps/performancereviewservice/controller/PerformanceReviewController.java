@@ -3,6 +3,7 @@ package com.hrps.performancereviewservice.controller;
 import com.hrps.performancereviewservice.dto.PerformanceReviewRequestDTO;
 import com.hrps.performancereviewservice.dto.PerformanceReviewResponseDTO;
 import com.hrps.performancereviewservice.service.PerformanceReviewService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import java.util.UUID;
 public class PerformanceReviewController {
 
     private final PerformanceReviewService performanceReviewService;
+    @Value("${sample.value}")
+    private String properties;
 
     public PerformanceReviewController(PerformanceReviewService performanceReviewService) {
         this.performanceReviewService = performanceReviewService;
@@ -37,5 +40,10 @@ public class PerformanceReviewController {
     @GetMapping("/{employeeId}")
     public ResponseEntity<List<PerformanceReviewResponseDTO>> getPerformanceReview(@PathVariable UUID employeeId) {
         return ResponseEntity.ok(performanceReviewService.getAllReviewsByEmployeeId(employeeId));
+    }
+
+    @GetMapping("/properties")
+    public String getResponse() {
+        return properties;
     }
 }
