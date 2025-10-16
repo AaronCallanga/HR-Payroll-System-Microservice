@@ -22,8 +22,19 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_URL:http://localhost:9094}
 
+
 management:
   endpoints:
     web:
       exposure:
         include: busrefresh # POST /actuator/busrefresh - if you want to refresh manually
+
+# Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    hostname: ${HOSTNAME:localhost}
