@@ -8,33 +8,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/AaronCallanga/hrps-configurations/tree/master
-          basedir: configs
+          #uri: https://github.com/AaronCallanga/hrps-configs
           clone-on-start: true
-          username: ${GITHUB_USERNAME:AaronCallanga}
-          password: ${GITHUB_TOKEN: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}
-          default-label: master
-          refresh-rate: 5
-    bus:
-      enabled: true
-      refresh:
-        enabled: true
-  kafka:
-    bootstrap-servers: ${KAFKA_URL:http://localhost:9094}
+          default-label: master #default is main
+          search-paths: 'configs/{application}' #search-paths - directory in the github, baseDir - directory where it would be cloned
+          uri: https://github.com/AaronCallanga/hrps-configurations
 
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: busrefresh # POST /actuator/busrefresh - if you want to refresh manually
-
-# Eureka
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${server.port}
-    hostname: ${HOSTNAME:localhost}
