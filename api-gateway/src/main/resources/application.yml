@@ -48,6 +48,25 @@ spring:
               filters:
                 - StripPrefix=2
                 - JwtValidation
+# Cloud Bus
+    bus:
+      enabled: true
+    stream:
+      default-binder: rabbit
+      bindings:
+        springCloudBusInput:
+          destination: springCloudBus
+          group: ${spring.application.name}
+
+  # Config Client
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+
+# RabbitMQ
+  rabbitmq:
+    addresses: ${RABBITMQ_URL:localhost:5672}
+    username: ${RABBITMQ_USERNAME:admin_user}
+    password: ${RABBITMQ_PASSWORD:password}
 
 # Eureka
 eureka:
@@ -59,3 +78,10 @@ eureka:
 auth:
   service:
     url: ${AUTH_SERVICE_URL:http://localhost:4005}
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh, refresh
