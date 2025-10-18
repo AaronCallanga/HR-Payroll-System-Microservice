@@ -5,6 +5,7 @@ import com.hrps.payrollservice.dto.PayrollResponse;
 import com.hrps.payrollservice.service.PayrollService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payroll")
+@RefreshScope
 public class PayrollController {
     private final PayrollService payrollService;
 
