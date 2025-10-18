@@ -22,7 +22,10 @@ spring:
 
     stream:
       default-binder: rabbit
-
+      bindings:
+        springCloudBusInput:
+          destination: springCloudBus
+          group: ${spring.application.name}
   rabbitmq:
     addresses: ${RABBITMQ_URL:localhost:5672}
     username: ${RABBITMQ_USERNAME:admin_user}

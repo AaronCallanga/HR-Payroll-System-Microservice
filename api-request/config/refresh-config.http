@@ -1,4 +1,4 @@
 ### POST request to trigger refresh for all service (must be a microservice not the config server)
-POST http://localhost:4003/actuator/busrefresh
+POST http://localhost:8888/actuator/busrefresh
 
 ###
