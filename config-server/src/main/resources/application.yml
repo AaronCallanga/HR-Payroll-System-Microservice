@@ -16,16 +16,16 @@ spring:
           basedir: ./configs-local #baseDir - directory where it would be cloned
 
     bus:
-      enabled: true
+      enabled: true #Allows apps to publish/receive Bus events
       refresh:
-        enabled: true
+        enabled: true #Enables /busrefresh - broadcast config refresh to all services
 
     stream:
-      default-binder: rabbit
+      default-binder: rabbit #Sets which message broker to use
       bindings:
         springCloudBusInput:
-          destination: springCloudBus
-          group: ${spring.application.name}
+          destination: springCloudBus #topic/exchange name (can have multiple queues where message is stored)
+          group: ${spring.application.name} #consumer group, create a queue per group
   rabbitmq:
     addresses: ${RABBITMQ_URL:localhost:5672}
     username: ${RABBITMQ_USERNAME:admin_user}
@@ -35,4 +35,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: busrefresh   # ✅ move this under management, not spring
+        include: busrefresh   # exposes /actuator/busrefresh endpoint

@@ -4,6 +4,7 @@ import com.hrps.payrollservice.dto.PayrollRequest;
 import com.hrps.payrollservice.dto.PayrollResponse;
 import com.hrps.payrollservice.service.PayrollService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ import java.util.List;
 @RequestMapping("/payroll")
 public class PayrollController {
     private final PayrollService payrollService;
+
+    @Value("${value.sample}")
+    private String properties;
 
     public PayrollController(PayrollService payrollService) {
         this.payrollService = payrollService;
@@ -68,5 +72,10 @@ public class PayrollController {
     public ResponseEntity<Void> deletePayroll(@PathVariable Long id) {
         payrollService.deletePayroll(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/properties")
+    public ResponseEntity<String> getProperties() {
+        return ResponseEntity.ok(properties);
     }
 }
