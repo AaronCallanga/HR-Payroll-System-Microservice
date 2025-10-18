@@ -13,4 +13,14 @@ spring:
           search-paths: configs/{application} #search-paths - directory in the github
           uri: https://github.com/AaronCallanga/hrps-configurations
           basedir: ./configs-local #baseDir - directory where it would be cloned
+    bus:
+      refresh:
+        enabled: true
+  kafka:
+    bootstrap-servers: ${KAFKA_URL:http://localhost:9094}
 
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: busrefresh
