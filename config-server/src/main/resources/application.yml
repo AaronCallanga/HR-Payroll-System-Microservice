@@ -8,9 +8,9 @@ spring:
     config:
       server:
         git:
-          #uri: https://github.com/AaronCallanga/hrps-configs
           clone-on-start: true
           default-label: master #default is main
-          search-paths: 'configs/{application}' #search-paths - directory in the github, baseDir - directory where it would be cloned
+          search-paths: configs/{application} #search-paths - directory in the github
           uri: https://github.com/AaronCallanga/hrps-configurations
+          basedir: ./configs-local #baseDir - directory where it would be cloned
 
