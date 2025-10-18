@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: config-server
+
   cloud:
     config:
       server:
@@ -13,14 +14,22 @@ spring:
           search-paths: configs/{application} #search-paths - directory in the github
           uri: https://github.com/AaronCallanga/hrps-configurations
           basedir: ./configs-local #baseDir - directory where it would be cloned
+
     bus:
+      enabled: true
       refresh:
         enabled: true
-  kafka:
-    bootstrap-servers: ${KAFKA_URL:http://localhost:9094}
+
+    stream:
+      default-binder: rabbit
+
+  rabbitmq:
+    addresses: ${RABBITMQ_URL:localhost:5672}
+    username: ${RABBITMQ_USERNAME:admin_user}
+    password: ${RABBITMQ_PASSWORD:password}
 
 management:
   endpoints:
-    jmx:
+    web:
       exposure:
-        include: busrefresh
+        include: busrefresh   # ✅ move this under management, not spring
