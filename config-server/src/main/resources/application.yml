@@ -35,4 +35,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: busrefresh   # exposes /actuator/busrefresh endpoint
+        include: busrefresh, refresh, health, info, encrypt, decrypt   # exposes /actuator/busrefresh endpoint
+
+encrypt:
+  key-store:
+    location: file:../keys/config-server-keystore.p12
+    password: storepassword
+    alias: configserver
+    type: PKCS12
