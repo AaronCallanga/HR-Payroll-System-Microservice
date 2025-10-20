@@ -94,4 +94,32 @@ management:
   endpoints:
     web:
       exposure:
-        include: busrefresh, refresh
+        include: busrefresh, refresh, health
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
+# Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10 # No. of request to monitor
+        failureRateThreshold: 50 # If 50% of request in the sliding window size fails, OPEN the circuitbreaker
+        waitDurationInOpenState: 10s # After 10 seconds, transition to HALF_OPEN state
+        permittedNumberOfCallsInHalfOpenState: 3 # If at least one of the request passed, transition to CLOSED state
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        minimum-number-of-calls: 5 # Start monitoring the request after 5 request. If not specified, it will require 10 request before it checks if there are any failed request
+        register-health-indicator: true
+    instances: # Create amn instance of circuitbreaker that individual service can use
+      sampleCircuitBreaker:
+        base-config: default # Inherits the properties/configuration of default configs
+
+# Retry
+# Timeout
+
+
