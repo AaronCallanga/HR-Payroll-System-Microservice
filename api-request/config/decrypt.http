@@ -1,0 +1,7 @@
+### GET request to example server
+POST http://localhost:8888/decrypt
+Content-Type: text/plain
+
+AQAeLxl+LilWQaxiqSkpptFTA08aOcFXWGOsLgDOFV2nCpImBoezURI8Ib5cXy/Usfv4tR1m08saiouNswbkpM4RZO+b2I5vbnTAHx9EhbYPWLtjvU05kLQor6BtQ+mVu/DOzklBBm0ezg64eui4trE6opHTJus1To7kD3u05whexps4HkeIOy6+L4krJ7iIFGZvrPeaCFdOZDS0ZHM3ZfmNSzoXE7DW1oV3V9bU2XBrnMCdOuRFPEWIxQleYobbGKmVyOFC9Q5hS+t8e3g5jWkaydMoLDi3WNjYrZ7GuIKugKXO7vcuQWRCq2WDxn/2/g9OCpLYevUcFccRA9aUyTMCvSYprnFL8AyEVN7Y/0QGV3FLPkktxP6RFLTotgZgf/M=
+
+###

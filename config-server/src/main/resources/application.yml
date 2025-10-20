@@ -35,11 +35,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: busrefresh, refresh, health, info, encrypt, decrypt   # exposes /actuator/busrefresh endpoint
+        include: busrefresh, refresh, health, info   # exposes /actuator/busrefresh endpoint
 
 encrypt:
   key-store:
-    location: file:../keys/config-server-keystore.p12
-    password: storepassword
+    location: file:/C:/Users/QC-SDO/Desktop/HR%20%26%20Payroll%20System%20Microservice/secrets/config-server-keystore.p12 #where the keystore are stored
+    password: ${ENCRYPT_KEYSTORE_PASSWORD:storepassword} #the -keystore you set
     alias: configserver
-    type: PKCS12
+    type: PKCS12 #uses PKCS12 instead of jks which is default
