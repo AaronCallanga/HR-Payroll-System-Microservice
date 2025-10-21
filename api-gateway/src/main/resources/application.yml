@@ -9,7 +9,11 @@ spring:
     gateway:
       server:
         webflux:
-          #default-filters:
+          default-filters:
+            - name: CircuitBreaker
+              args:
+                name: globalCircuitBreaker # instance name
+                fallbackUri: forward:/fallback
 
           routes:
             - id: auth-service-route
@@ -20,11 +24,8 @@ spring:
                 - StripPrefix=2
                 - name: CircuitBreaker
                   args:
-                    name: sampleCircuitBreaker
+                    name: authServiceCB # instance name
                     fallbackUri: forward:/fallback
-                    statusCode:
-                      - 500
-                      - NOT_FOUND
 
             - id: employee-service-route
               uri: lb://EMPLOYEE-SERVICE
@@ -33,6 +34,10 @@ spring:
               filters:
                 - StripPrefix=2 # strip the uri two slash (remove the /api/v1 ) before routing the request
                 - JwtValidation # Spring will look for a class that is prefixed with 'GatewayFilterFactory'
+                - name: CircuitBreaker
+                  args:
+                    name: employeeServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: attendance-service-route
               uri: lb://ATTENDANCE-SERVICE
@@ -57,6 +62,9 @@ spring:
               filters:
                 - StripPrefix=2
                 - JwtValidation
+          httpclient:
+            connect-timeout: 2000
+            response-timeout: 5s
 
     # Cloud Bus
     bus:
@@ -115,11 +123,21 @@ resilience4j:
         automaticTransitionFromOpenToHalfOpenEnabled: true
         minimum-number-of-calls: 5 # Start monitoring the request after 5 request. If not specified, it will require 10 request before it checks if there are any failed request
         register-health-indicator: true
+      groupA: # You can define many groups which instances can inherit too
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 2
     instances: # Create amn instance of circuitbreaker that individual service can use
-      sampleCircuitBreaker:
-        base-config: default # Inherits the properties/configuration of default configs
-
+      globalCircuitBreaker:
+        base-config: default
+      authServiceCB:
+        base-config: groupA # Inherits the properties/configuration of group configs, otherwise, default configs
+        wait-duration-in-open-state: 5s # Overwrite this properties
+      employeeServiceCB:
+        base-config: groupA
 # Retry
-# Timeout
+# Timelimiter (gateway timeout global or resilience4j timelimiter for service to service?)
+# Rate limiter (redis distributed)
+
 
 
