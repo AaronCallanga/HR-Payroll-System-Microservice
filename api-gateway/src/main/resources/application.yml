@@ -14,6 +14,19 @@ spring:
               args:
                 name: globalCircuitBreaker # instance name
                 fallbackUri: forward:/fallback
+            - name: Retry
+              args:
+                retries: 3 # (1 initial + 2 retries)
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR, SERVICE_UNAVAILABLE
+                methods: GET # Only retry idempotent methods
+                backoff:
+                  firstBackoff: 200ms       # Wait 200ms before first retry
+                  maxBackoff: 2s            # Wait no more than 2s total between retries
+                  factor: 2                 # Exponential backoff factor
+                  basedOnPreviousValue: true
+                jitter: # Randomize backoff to avoid retry storms
+                  randomFactor: 0.5         # +/- 50% random delay
+                timeout: 6s                 # Stop retrying after 6 seconds total (including backoff)
 
           routes:
             - id: auth-service-route
@@ -63,8 +76,8 @@ spring:
                 - StripPrefix=2
                 - JwtValidation
           httpclient:
-            connect-timeout: 2000 # How long the gateway waits while establishing a TCP connection to the backend service (milliseconds).
             response-timeout: 5s # How long the gateway waits for the backend to send a full HTTP response after connection.
+            connect-timeout: 2000
 
     # Cloud Bus
     bus:
@@ -75,6 +88,7 @@ spring:
         springCloudBusInput:
           destination: springCloudBus
           group: ${spring.application.name}
+
 
   # Config Client
   config:
@@ -123,7 +137,7 @@ resilience4j:
         automaticTransitionFromOpenToHalfOpenEnabled: true
         minimum-number-of-calls: 5 # Start monitoring the request after 5 request. If not specified, it will require 10 request before it checks if there are any failed request
         register-health-indicator: true
-      groupA: # You can define many groups which instances can inherit too
+      groupA: # You can define many groups which instances can inherit too, overrides the default configurations
         sliding-window-size: 5
         failure-rate-threshold: 50
         minimum-number-of-calls: 2
@@ -136,14 +150,19 @@ resilience4j:
       employeeServiceCB:
         base-config: groupA
 
-# Time Limiter
+# Retry
+
+
+
+
+  # Time Limiter (you can just use this in service to service communications, and use native gateway timeout instead)
   timelimiter:
     configs:
       default:
         timeout-duration: 4s # lower than the timeout response(gateway level)
-        cancel-running-future: true # cancels the operation
+        cancel-running-future: true # cancels the operation for non blocking calls
     instances:
-      globalCircuitBreaker: # apply and attach this configurations (of Time Limiter) to the instance of circuit breaker
+      globalCircuitBreaker: # apply and attach this configurations (of Time Limiter) to the instance of circuit breaker (must be the same name)
         base-config: default
       authServiceCB:
         base-config: default
@@ -151,9 +170,29 @@ resilience4j:
         base-config: default
 
 
-  # Retry
-# Timelimiter (gateway timeout global or resilience4j timelimiter for service to service?)
+# Retry
 # Rate limiter (redis distributed)
 
 
-
+#resilience4j:
+#  retry:
+#    configs:
+#      default:
+#        max-attempts: 3              # total attempts (1 initial + 2 retries)
+#        wait-duration: 1s            # wait time between retries
+#        retry-exceptions:
+#          - java.io.IOException
+#          - org.springframework.web.reactive.function.client.WebClientResponseException
+#        ignore-exceptions:
+#          - java.lang.IllegalArgumentException
+#      groupA:
+#        max-attempts: 2
+#        wait-duration: 500ms
+#
+#    instances:
+#      globalCircuitBreaker:
+#        base-config: default
+#      authServiceCB:
+#        base-config: groupA
+#      employeeServiceCB:
+#        base-config: default

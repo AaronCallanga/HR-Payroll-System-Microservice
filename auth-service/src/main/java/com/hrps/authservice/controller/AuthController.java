@@ -4,6 +4,7 @@ import com.hrps.authservice.dto.LoginRequestDTO;
 import com.hrps.authservice.dto.LoginResponseDTO;
 import com.hrps.authservice.dto.RegisterRequestDTO;
 import com.hrps.authservice.service.AuthService;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/auth")
@@ -57,6 +59,23 @@ public class AuthController {
 
         return authService.validateToken(token) ?
                 ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @GetMapping("/test")
+    public CompletableFuture<ResponseEntity<String>> test() throws InterruptedException {
+//        Thread.sleep(20000);
+//        System.out.println("TEST");
+//        return ResponseEntity.ok("TEST");
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(20000);
+                System.out.println("TEST");
+            } catch (InterruptedException e) {
+                System.out.println("Task cancelled!");
+                Thread.currentThread().interrupt();
+            }
+            return ResponseEntity.ok("TEST");
+        });
     }
 
 }
