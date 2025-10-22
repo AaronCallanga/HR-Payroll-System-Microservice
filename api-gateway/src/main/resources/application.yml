@@ -19,9 +19,9 @@ spring:
                 retries: 3 # (1 initial + 2 retries)
                 statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR, SERVICE_UNAVAILABLE
                 methods: GET # Only retry idempotent methods
-                backoff:
+                backoff: # Calculate the waiting time/delay per retry
                   firstBackoff: 200ms       # Wait 200ms before first retry
-                  maxBackoff: 2s            # Wait no more than 2s total between retries
+                  maxBackoff: 2s            # Wait no more than 2s total between retries, maximum delay is 2s
                   factor: 2                 # Exponential backoff factor
                   basedOnPreviousValue: true
                 jitter: # Randomize backoff to avoid retry storms
@@ -75,7 +75,7 @@ spring:
               filters:
                 - StripPrefix=2
                 - JwtValidation
-          httpclient:
+          httpclient: # Timeout/Gateway TimeLimiter
             response-timeout: 5s # How long the gateway waits for the backend to send a full HTTP response after connection.
             connect-timeout: 2000
 
@@ -88,6 +88,10 @@ spring:
         springCloudBusInput:
           destination: springCloudBus
           group: ${spring.application.name}
+
+    circuitbreaker:
+      resilience4j:
+        disable-time-limiter: true
 
 
   # Config Client
@@ -150,29 +154,25 @@ resilience4j:
       employeeServiceCB:
         base-config: groupA
 
-# Retry
+
 
 
 
 
   # Time Limiter (you can just use this in service to service communications, and use native gateway timeout instead)
-  timelimiter:
-    configs:
-      default:
-        timeout-duration: 4s # lower than the timeout response(gateway level)
-        cancel-running-future: true # cancels the operation for non blocking calls
-    instances:
-      globalCircuitBreaker: # apply and attach this configurations (of Time Limiter) to the instance of circuit breaker (must be the same name)
-        base-config: default
-      authServiceCB:
-        base-config: default
-      employeeServiceCB:
-        base-config: default
-
-
-# Retry
-# Rate limiter (redis distributed)
-
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 4s # lower than the timeout response(gateway level)
+#        cancel-running-future: true # cancels the operation for non blocking calls
+#    instances:
+#      globalCircuitBreaker: # apply and attach this configurations (of Time Limiter) to the instance of circuit breaker (must be the same name)
+#        base-config: default
+#      authServiceCB:
+#        base-config: default
+#      employeeServiceCB:
+#        base-config: default
 
 #resilience4j:
 #  retry:

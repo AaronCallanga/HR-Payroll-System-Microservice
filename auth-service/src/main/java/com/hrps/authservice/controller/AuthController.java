@@ -62,20 +62,23 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public CompletableFuture<ResponseEntity<String>> test() throws InterruptedException {
+    public ResponseEntity<String> test() throws InterruptedException {
 //        Thread.sleep(20000);
 //        System.out.println("TEST");
 //        return ResponseEntity.ok("TEST");
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(20000);
-                System.out.println("TEST");
-            } catch (InterruptedException e) {
-                System.out.println("Task cancelled!");
-                Thread.currentThread().interrupt();
-            }
-            return ResponseEntity.ok("TEST");
-        });
+//        return CompletableFuture.supplyAsync(() -> {
+//            try {
+//                Thread.sleep(20000);
+//                System.out.println("TEST");
+//            } catch (InterruptedException e) {
+//                System.out.println("Task cancelled!");
+//                Thread.currentThread().interrupt();
+//            }
+            //return ResponseEntity.ok("TEST");
+//        });
+        System.out.println("TEST");
+
+            return ResponseEntity.internalServerError().build();
     }
 
 }
