@@ -29,10 +29,10 @@ spring:
                 timeout: 6s                 # Stop retrying after 6 seconds total (including backoff)
             - name: RequestRateLimiter
               args:
-                key-resolver: "#{@userKeyResolver}"
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 2
-                redis-rate-limiter.requestedToken: 1
+                key-resolver: "#{@ipKeyResolver}"  # if you dont set this, requests will be rejected 403
+                redis-rate-limiter.replenishRate: 1 # Refresh rate, x token per second
+                redis-rate-limiter.burstCapacity: 3 # Max bucket capacity
+                redis-rate-limiter.requestedToken: 1 # Token cost per request
 
           routes:
             - id: auth-service-route
@@ -117,6 +117,7 @@ spring:
       port: 6379
       connect-timeout: 2s
       password: redis_password
+
 # Eureka
 eureka:
   client:

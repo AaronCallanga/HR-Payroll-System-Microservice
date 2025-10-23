@@ -81,6 +81,12 @@ public class AuthController {
         return ResponseEntity.internalServerError().build();
     }
 
+    @GetMapping("/test-rate")
+    public ResponseEntity<String> testRate() {
+        System.out.println("TEST: " + LocalDateTime.now());
+        return ResponseEntity.ok("TEST" + LocalDateTime.now());
+    }
+
 
 }
 
