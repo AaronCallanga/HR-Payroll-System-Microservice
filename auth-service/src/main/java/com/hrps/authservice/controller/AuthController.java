@@ -75,7 +75,7 @@ public class AuthController {
             return ResponseEntity.ok("TEST");
     }
 
-    @GetMapping("/test-limiter")
+    @GetMapping("/test-retry")
     public ResponseEntity<String> testRetry() {
         System.out.println("TEST: " + LocalDateTime.now());
         return ResponseEntity.internalServerError().build();

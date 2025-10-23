@@ -27,6 +27,12 @@ spring:
                 jitter: # Randomize backoff to avoid retry storms
                   randomFactor: 0.5         # +/- 50% random delay
                 timeout: 6s                 # Stop retrying after 6 seconds total (including backoff)
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+                redis-rate-limiter.requestedToken: 1
 
           routes:
             - id: auth-service-route
@@ -78,7 +84,7 @@ spring:
 # Timeout/TimeLimiter
           httpclient:
             response-timeout: 5s # How long the gateway waits for the backend to send a full HTTP response after connection.
-            connect-timeout: 2000
+            connect-timeout: 5000
 
     # Cloud Bus
     bus:
@@ -111,7 +117,6 @@ spring:
       port: 6379
       connect-timeout: 2s
       password: redis_password
-
 # Eureka
 eureka:
   client:
@@ -166,7 +171,6 @@ resilience4j:
 
 
 
-
   # Time Limiter (you can just use this in service to service communications, and use native gateway timeout instead)
 #resilience4j:
 #  timelimiter:
@@ -204,3 +208,4 @@ resilience4j:
 #        base-config: groupA
 #      employeeServiceCB:
 #        base-config: default
+
