@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -61,24 +63,24 @@ public class AuthController {
                 ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() throws InterruptedException {
-//        Thread.sleep(20000);
-//        System.out.println("TEST");
-//        return ResponseEntity.ok("TEST");
-//        return CompletableFuture.supplyAsync(() -> {
-//            try {
-//                Thread.sleep(20000);
-//                System.out.println("TEST");
-//            } catch (InterruptedException e) {
-//                System.out.println("Task cancelled!");
-//                Thread.currentThread().interrupt();
-//            }
-            //return ResponseEntity.ok("TEST");
-//        });
-        System.out.println("TEST");
-
-            return ResponseEntity.internalServerError().build();
+    @GetMapping("/test-limiter")
+    public ResponseEntity<String> testLimiter() {
+            try {
+                Thread.sleep(20000);
+                System.out.println("TEST");
+            } catch (InterruptedException e) {
+                System.out.println("Task cancelled!");
+                Thread.currentThread().interrupt();
+            }
+            return ResponseEntity.ok("TEST");
     }
 
+    @GetMapping("/test-limiter")
+    public ResponseEntity<String> testRetry() {
+        System.out.println("TEST: " + LocalDateTime.now());
+        return ResponseEntity.internalServerError().build();
+    }
+
+
 }
+
