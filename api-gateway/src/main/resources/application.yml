@@ -81,6 +81,37 @@ spring:
               filters:
                 - StripPrefix=2
                 - JwtValidation
+# Swagger Routes
+            - id: attendance-docs
+              uri: lb://ATTENDANCE-SERVICE
+              predicates:
+                - Path=/attendance/v3/api-docs
+              filters:
+                - RewritePath=/attendance/v3/api-docs, /v3/api-docs
+            - id: auth-docs
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/auth/v3/api-docs
+              filters:
+                - RewritePath=/auth/v3/api-docs, /v3/api-docs
+            - id: employee-docs
+              uri: lb://EMPLOYEE-SERVICE
+              predicates:
+                - Path=/employee/v3/api-docs
+              filters:
+                - RewritePath=/employee/v3/api-docs, /v3/api-docs
+            - id: payroll-docs
+              uri: lb://PAYROLL-SERVICE
+              predicates:
+                - Path=/payroll/v3/api-docs
+              filters:
+                - RewritePath=/payroll/v3/api-docs, /v3/api-docs
+            - id: performance-review-docs
+              uri: lb://PREFORMANCE-REVIEW-SERVICE
+              predicates:
+                - Path=/performance-review/v3/api-docs
+              filters:
+                - RewritePath=/performance-review/v3/api-docs, /v3/api-docs
 # Timeout/TimeLimiter
           httpclient:
             response-timeout: 5s # How long the gateway waits for the backend to send a full HTTP response after connection.
