@@ -107,7 +107,7 @@ spring:
               filters:
                 - RewritePath=/payroll/v3/api-docs, /v3/api-docs
             - id: performance-review-docs
-              uri: lb://PREFORMANCE-REVIEW-SERVICE
+              uri: lb://PERFORMANCE-REVIEW-SERVICE
               predicates:
                 - Path=/performance-review/v3/api-docs
               filters:
@@ -202,7 +202,6 @@ resilience4j:
 
 
 
-
   # Time Limiter (you can just use this in service to service communications, and use native gateway timeout instead)
 #resilience4j:
 #  timelimiter:
@@ -240,4 +239,20 @@ resilience4j:
 #        base-config: groupA
 #      employeeServiceCB:
 #        base-config: default
+
+# Swagger
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Attendance Service
+        url: /attendance/v3/api-docs
+      - name: Auth Service
+        url: /auth/v3/api-docs
+      - name: Employee Service
+        url: /employee/v3/api-docs
+      - name: Payroll Service
+        url: /payroll/v3/api-docs
+      - name: Performance Review Service
+        url: /performance-review/v3/api-docs
+    path: /swagger-ui.html
 
