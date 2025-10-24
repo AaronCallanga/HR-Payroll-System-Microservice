@@ -30,8 +30,8 @@ spring:
             - name: RequestRateLimiter
               args:
                 key-resolver: "#{@ipKeyResolver}"  # if you dont set this, requests will be rejected 403
-                redis-rate-limiter.replenishRate: 1 # Refresh rate, x token per second
-                redis-rate-limiter.burstCapacity: 3 # Max bucket capacity
+                redis-rate-limiter.replenishRate: 10 # Refresh rate, x token per second
+                redis-rate-limiter.burstCapacity: 20 # Max bucket capacity
                 redis-rate-limiter.requestedToken: 1 # Token cost per request
 
           routes:
