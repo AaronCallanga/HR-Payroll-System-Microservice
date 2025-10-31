@@ -1,6 +1,7 @@
 package com.hrps.employeeservice.dto;
 
 import com.hrps.employeeservice.dto.validator.OnCreate;
+import com.hrps.employeeservice.dto.validator.OnUpdate;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,17 +12,18 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
 
 public class EmployeeRequest {
-    @NotBlank(message = "First name is required")
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class}, message = "First name is required")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class}, message = "Last name is required")
     private String lastName;
 
-    @Email(message = "Invalid email format")
-    @NotBlank(message = "Email is required")
+    @Email(groups = {OnCreate.class, OnUpdate.class}, message = "Invalid email format")
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class}, message = "Email is required")
     private String email;
 
     @Pattern(
+            groups = {OnCreate.class, OnUpdate.class},
             regexp = "^\\+?[0-9]{10,15}$",
             message = "Phone number must be valid (10–15 digits, optional +)"
     )
@@ -31,14 +33,14 @@ public class EmployeeRequest {
     @PastOrPresent(groups = OnCreate.class, message = "Hire date cannot be in the future")
     private LocalDate hireDate;
 
-    @NotBlank(message = "Role is required")
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class}, message = "Role is required")
     private String role;
 
-    @NotNull(message = "Salary is required")
-    @Positive(message = "Salary must be a positive number")
+    @NotNull(groups = {OnCreate.class, OnUpdate.class}, message = "Salary is required")
+    @Positive(groups = {OnCreate.class, OnUpdate.class}, message = "Salary must be a positive number")
     private Double salary;
 
-    @NotBlank(groups = OnCreate.class, message = "Status is required")
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class}, message = "Status is required")
     private String status;
 
     @NotNull(groups = OnCreate.class, message = "Department ID is required")
