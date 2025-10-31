@@ -1,6 +1,6 @@
 package com.hrps.employeeservice.dto;
 
-import com.hrps.employeeservice.dto.validator.UpdateEmployeeValidationGroup;
+import com.hrps.employeeservice.dto.validator.OnCreate;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,8 +27,8 @@ public class EmployeeRequest {
     )
     private String phoneNumber;
 
-    @NotNull(groups = UpdateEmployeeValidationGroup.class, message = "Hire date is required")
-    @PastOrPresent(message = "Hire date cannot be in the future")
+    @NotNull(groups = OnCreate.class, message = "Hire date is required")
+    @PastOrPresent(groups = OnCreate.class, message = "Hire date cannot be in the future")
     private LocalDate hireDate;
 
     @NotBlank(message = "Role is required")
@@ -38,10 +38,10 @@ public class EmployeeRequest {
     @Positive(message = "Salary must be a positive number")
     private Double salary;
 
-    @NotBlank(message = "Status is required")
+    @NotBlank(groups = OnCreate.class, message = "Status is required")
     private String status;
 
-    @NotNull(message = "Department ID is required")
+    @NotNull(groups = OnCreate.class, message = "Department ID is required")
     private Long departmentId;
 
     public EmployeeRequest() {

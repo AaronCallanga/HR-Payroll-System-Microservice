@@ -2,11 +2,14 @@ package com.hrps.employeeservice.controller;
 
 import com.hrps.employeeservice.dto.EmployeeRequest;
 import com.hrps.employeeservice.dto.EmployeeResponse;
+import com.hrps.employeeservice.dto.validator.OnCreate;
 import com.hrps.employeeservice.model.Employee;
 import com.hrps.employeeservice.service.EmployeeService;
 import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +31,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeResponse> addEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
+    public ResponseEntity<EmployeeResponse> addEmployee(@Validated({OnCreate.class, Default.class}) @RequestBody EmployeeRequest employeeRequest) {
         return ResponseEntity.ok(employeeService.addEmployee(employeeRequest));
     }
 
