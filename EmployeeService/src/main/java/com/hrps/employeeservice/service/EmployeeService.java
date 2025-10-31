@@ -49,11 +49,24 @@ public class EmployeeService {
         return employeeResponse;
     }
 
-    public Employee updateEmployee(UUID employeeId, EmployeeRequest employeeRequest) {
+    public EmployeeResponse updateEmployee(UUID employeeId, EmployeeRequest employeeRequest) {
 
-        // published kafka event,
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
 
-        return null;
+        EmployeeMapper.updateEmployee(employee, employeeRequest);
+
+        Employee updatedEmployee = employeeRepository.save(employee);
+
+        EmployeeResponse employeeResponse = EmployeeMapper.toResponse(updatedEmployee);
+
+        // Send Kafka Event
+        employeeEventProducer.sendEmployeeUpdateEvent(updatedEmployee);
+
+        // Listeners:
+        //  - Notification Service - email for information update
+
+        return employeeResponse;
     }
 
     public void deactivateEmployee() {}

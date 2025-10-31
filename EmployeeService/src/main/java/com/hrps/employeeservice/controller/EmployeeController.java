@@ -3,6 +3,7 @@ package com.hrps.employeeservice.controller;
 import com.hrps.employeeservice.dto.EmployeeRequest;
 import com.hrps.employeeservice.dto.EmployeeResponse;
 import com.hrps.employeeservice.dto.validator.OnCreate;
+import com.hrps.employeeservice.dto.validator.OnUpdate;
 import com.hrps.employeeservice.model.Employee;
 import com.hrps.employeeservice.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +40,12 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getEmployeeList() {
         return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> updateEmployee(@Validated({OnUpdate.class}) @RequestBody EmployeeRequest employeeRequest,
+                                                           @PathVariable UUID id) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, employeeRequest));
     }
 
     @GetMapping("/{id}")

@@ -91,4 +91,19 @@ public class EmployeeMapper {
                                .setDepartment(departmentName)
                                .build();
     }
+
+    public static void updateEmployee(Employee employee, EmployeeRequest request) {
+        if (request == null) {
+            return;
+        }
+
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setEmail(request.getEmail());
+        employee.setPhoneNumber(request.getPhoneNumber());
+        employee.setRole(request.getRole());
+        employee.setSalary(request.getSalary());
+        employee.setStatus(request.getStatus() != null ? request.getStatus() : "ACTIVE");
+
+    }
 }
