@@ -49,6 +49,15 @@ public class EmployeeService {
         return employeeResponse;
     }
 
+    public Employee updateEmployee(UUID employeeId, EmployeeRequest employeeRequest) {
+
+        // published kafka event,
+
+        return null;
+    }
+
+    public void deactivateEmployee() {}
+
     public List<EmployeeResponse> getAllEmployees() {
         return employeeRepository.findAll().stream()
                                  .map(EmployeeMapper::toResponse)

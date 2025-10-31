@@ -1,5 +1,6 @@
 package com.hrps.employeeservice.dto;
 
+import com.hrps.employeeservice.dto.validator.UpdateEmployeeValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ public class EmployeeRequest {
     )
     private String phoneNumber;
 
-    @NotNull(message = "Hire date is required")
+    @NotNull(groups = UpdateEmployeeValidationGroup.class, message = "Hire date is required")
     @PastOrPresent(message = "Hire date cannot be in the future")
     private LocalDate hireDate;
 

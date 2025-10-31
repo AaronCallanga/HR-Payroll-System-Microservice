@@ -16,6 +16,5 @@ It’ll make building all modules (like schema, employee-service, etc.) easier w
 14. Attendance Service schema update attendance table:   check_in TIMESTAMP, check_out TIMESTAMP,
 15. implement scheduling, multithreading (virtual thread), async task, batch processing, and etc...
 16. Api gateway send the token/email to the service too for fetching their own records (if employee can ancess the system). If token, make the auth service as grpc server, and let other microservice be client to get the information based on the token or simply do rest client.
-17. Implement centralize swagger
 18. Implement circuit breaker, retry, timeout, rate limiting in service-to-service communication(gRPC)
 19. Implement Idempotent API, then configure RETRY
